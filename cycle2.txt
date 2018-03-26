@@ -1,0 +1,26 @@
+1.Display departments in which more than five employees have commission percentage.
+SELECT DEPARTMENT_ID FROM EMPLOYEES 
+WHERE COMMISSION_PCT IS NOT NULL
+GROUP BY DEPARTMENT_ID 
+HAVING COUNT(COMMISSION_PCT)>5
+
+2.Display employee ID for employees who did more than one job in the past.
+SELECT EMPLOYEE_ID FROM JOB_HISTORY GROUP BY EMPLOYEE_ID HAVING COUNT(*) > 1
+
+3.Display job ID of jobs that were done by more than 3 employees for more than 100 days.
+SELECT JOB_ID FROM JOB_HISTORY WHERE END_DATE-START_DATE > 100 GROUP BY JOB_ID HAVING COUNT(*)>3
+
+4.Display department ID, year, and Number of employees joined.
+SELECT DEPARTMENT_ID, TO_CHAR(HIRE_DATE,'YYYY'), COUNT(EMPLOYEE_ID) FROM EMPLOYEES GROUP BY DEPARTMENT_ID, TO_CHAR(HIRE_DATE, 'YYYY') ORDER BY DEPARTMENT_ID
+
+5.Display departments where any manager is managing more than 5 employees.
+SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES GROUP BY DEPARTMENT_ID, MANAGER_ID HAVING COUNT(EMPLOYEE_ID) > 5;
+
+6.Change salary of employee 115 to 8000 if the existing salary is less than 6000.
+ UPDATE EMPLOYEES SET SALARY = 8000 WHERE EMPLOYEE_ID = 115 AND SALARY < 6000;
+
+7.Insert a new employee into employees with all the required details.
+ INSERT INTO EMPLOYEES  (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE,JOB_ID, SALARY, DEPARTMENT_ID) 
+ VALUES (207, 'ANGELA', 'SNYDER','ANGELA','215 253 4737', SYSDATE, 'SA_MAN', 12000, 80);
+8.Delete department 20.
+ DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID=20;
